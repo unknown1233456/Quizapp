@@ -10,18 +10,18 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activestate;
+  String activestate='StartState';
 
 @override
   void initState() {
    
     super.initState();
-     activestate=StartPage(currentstate);
+
   }
 
   void currentstate(){
     setState(() {
-      activestate=QuestionScreen();
+     activestate='QuestionState';
     });
   }
   @override
@@ -33,7 +33,7 @@ class _QuizState extends State<Quiz> {
           gradient: LinearGradient(
         colors: [Colors.deepPurple,Color.fromARGB(255, 99, 47, 243)],
       )),
-      child: activestate,
+      child: activestate=='StartState'? StartPage(currentstate):QuestionScreen(),
     ),
       ),
     );

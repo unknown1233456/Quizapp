@@ -1,6 +1,5 @@
 
 import 'package:quiz_app/quizQuestions.dart';
-
 var questions=[
    quizQuestions(
     'What is Flutter?',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/question_screen.dart';
+import 'package:quiz_app/questions.dart';
+import 'package:quiz_app/result.dart';
 import 'package:quiz_app/start_page.dart';
 
 class Quiz extends StatefulWidget {
@@ -10,20 +12,31 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  String activestate='StartState';
+  Widget? activestate;
+  List<String>setAnswer=[];
 
 @override
   void initState() {
-   
+   activestate=StartPage(currentstate);
     super.initState();
 
   }
 
   void currentstate(){
     setState(() {
-     activestate='QuestionState';
+     activestate=QuestionScreen(choosedAnswers);
     });
   }
+  void choosedAnswers(answer){
+  setAnswer.add(answer);
+  setState(() {
+     if(setAnswer.length==questions.length){
+    activestate=Result();
+  }
+  });
+ 
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +46,7 @@ class _QuizState extends State<Quiz> {
           gradient: LinearGradient(
         colors: [Colors.deepPurple,Color.fromARGB(255, 99, 47, 243)],
       )),
-      child: activestate=='StartState'? StartPage(currentstate):QuestionScreen(),
+      child: activestate,
     ),
       ),
     );
